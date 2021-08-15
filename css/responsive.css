@@ -1,0 +1,621 @@
+
+/* -============ RESPONSIVENESS FOR Tablet =========== */
+
+@media only screen and  (max-width: 768px){
+
+    .bg_main {
+        max-width: 100%;
+        max-height: auto;
+    }
+
+    .fg_center{
+        max-height: auto;
+        max-width: 100%;
+        padding: 0px 10px;
+    }
+    /* Heroe section */
+    .hr__main > h1 {
+        font-size: 60px;
+        line-height: 60px;
+    }
+    .hr__main > h2 {
+        font-size: 20px;
+        line-height: 25px;
+    }
+    .sub_head_line {
+        font-size: 16px;
+    }
+
+    .folow__icon a i {
+        font-size: 20px;
+    }
+
+    .ft_logo a img {
+        width: auto;
+        height: 45px;
+    }
+
+    .about {
+        flex-direction: column;
+        max-width: 100%;
+        margin-top: 150px;
+    }
+
+    title .sub__title {
+        font-size: 30px;
+    }
+
+    .abt__par {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .sub__menu__1 .sub__1 > i,
+    .menu__1 > i {
+        font-size: 20px;
+    }
+
+    .p_head {
+        font-size: 14px;
+    }
+
+    .p_body {
+        line-height: 22px;
+    }
+    .tag__icon > span {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .tag__icon {
+        width: 2px;
+        height: 236px;
+    }
+
+
+    .privacy__1 .privacy__body {
+        padding: 97px 40px;
+        font-size: 13px;
+    }
+
+    .fq__center {
+        text-align: center;
+    }
+    .conduct__1 .conduct__body {
+        padding: 97px 40px;
+        font-size: 13px;
+    }
+    .join_us {
+       flex-direction: column;
+    }
+
+    .join__1 {
+        margin-bottom: 100px;
+    }
+    .j_txt {
+        font-size: 14px;
+        line-height: 25px;
+    }
+    .box_1 > p {
+        font-size: 14px;
+        line-height: 23px;
+    }
+
+
+    .box_1 {
+        width: 200px;
+        height: 200px;
+    }
+
+
+    .comm {
+        flex-direction: column;
+    }
+
+    .wht__title {
+        font-size: 40px !important;
+        line-height: 45px !important;
+    }
+
+    .comm__txt {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .comm__1, .comm__2 {
+        margin: 100px 0px;
+    }
+
+    .comm__2 > img{
+        width: 100%;
+    }
+
+    .sp__par > p {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .sp__btn__1 {
+        padding: 8px 30px;
+        font-size: 14px;
+    }
+
+    .in_bx {
+        width: 150px;
+        height: 150px;
+    }
+
+    .in_bx > img{
+        width: 100%;
+    }
+    .set_bt > h3 {
+        font-size: 16px;
+    }
+
+    .set_bt > p {
+        font-size: 14px;
+        line-height: 0px;
+    }
+
+    .set_3 {
+        margin: 20px 0px;
+    }
+    .team__grid {
+        height: auto;
+        width: 100%;
+        display: grid;
+        grid-template-areas:
+            "bx_1 bx_2"
+            "bx_3 bx_4"
+            "bx_5 bx_6"
+            "bx_7 bx_8"
+            "bx_9 bx_10"
+            "bx_11 bx_12"
+        ;
+
+        column-gap: 90px;
+    }
+
+    .abt__2 {
+        max-width: 100%;
+        margin-top: 50px;
+        width: auto;
+    }
+
+ 
+    .connect {
+        flex-direction: column;
+    }
+
+    .connect__1 > img{
+        width: 100%;
+    }
+    .connect__1 {
+        margin-bottom: 50px;
+    }
+
+    .join__2 {
+        column-gap: 14px;
+    }
+
+    .con__title {
+        font-size: 40px !important;
+        line-height: 45px !important;
+    }
+
+    .con_1 {
+        font-size: 14px;
+    }
+    .sp_link {
+        font-size: 14px;
+    }
+
+    .connect__1, .connect__2 {
+        margin-bottom: 100px;
+    }
+
+    .ft__caption {
+        width: 100%;
+        column-gap: 9px;
+        padding-top: 100px;
+    }
+    .in_text {
+        font-size: 16px;
+    }
+    .ft__01 li a {
+        font-size: 13px;
+    }
+    .ft_copy > h3 {
+        font-size: 13px;
+    }
+    .ft_logo a {
+        width: 108px;
+    }
+    .box_1 > i {
+        font-size: 45px;
+    }
+
+    .list_menu li a {
+        font-size: 18px;
+    }
+
+    .logo a img {
+        width: 95px;
+        height: 51px;
+    }
+  
+    
+
+    .folow_txt {
+        font-size: 14px;
+    }
+
+    .main__menu .menu__1 {
+        font-size: 24px;
+    }
+    .sub__1 {
+        font-size: 16px;
+    }
+
+}
+
+/* ====== For Ipad phones === */
+@media only screen and (max-width:1424px) and (min-width: 768px)
+{
+    .fg_center {
+        max-width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .team__grid {
+        column-gap: 60px;
+    }
+
+
+    .in_bx {
+        width: 150px;
+        height: 150px;
+    }
+    .in_bx > img {
+        width: 100%;
+    }
+
+    .connect {
+        column-gap: 53px;
+    }
+
+    .comm {
+        column-gap: 30px;
+    }
+
+    .list_menu li a {
+        font-size: 16px;
+    }
+
+    .join_btn a {
+        font-size: 16px;
+    }
+
+
+}
+
+
+/* ====== For Ipad phones === */
+@media only screen and (max-width:830px) and (min-width: 768px)
+{
+   .hr__main > h1 {
+    font-size: 68px;
+    line-height: 68px;
+   }
+
+   .hr__main > h2 {
+    font-size: 24px;
+    line-height: 33px;
+   }
+    .tag__icon {
+      /* height: 240px; */
+    }
+
+    .about {
+        flex-direction: column;
+        row-gap: 100px;
+    }
+
+    .box_1 {
+        width: 200px;
+    }
+    .tag__icon > span {
+        width: 30px;
+        height: 30px;
+    }
+
+    .join_us {
+        flex-direction: column;
+        row-gap: 100px;
+    }
+
+    .wht__title {
+        font-size: 40px !important;
+    }
+
+    .team__grid {
+        height: auto;
+        width: 100%;
+        display: grid;
+        grid-template-areas:
+            "bx_1 bx_2 bx_3"
+            "bx_4 bx_5 bx_6"
+            "bx_7 bx_8 bx_9"
+            "bx_10 bx_11 bx_12";
+    }
+
+    .con__title {
+        font-size: 40px !important;
+    }
+
+    .abt__2{
+        width: auto;
+    }
+
+
+
+
+
+}
+
+/* ====== For smartphones === */
+@media only screen and (max-width: 450px)
+{
+    .hr__main {
+        width: 100%;
+    }
+
+    .hr__main > h2 {
+        font-size: 16px;
+    }
+    .hr__main > h1 {
+        font-size: 40px;
+    }
+    .title .sub__title {
+        font-size: 28px;
+        line-height: 30px;
+        
+    }
+    .abt__2 {
+        padding: 0px 4px;
+        margin: 0px;
+        width: auto;
+    }
+    .box_1 > i {
+        font-size: 40px;
+    }
+    .box_1 > p {
+        font-size: 12px;
+    }
+
+    .wht__title {
+        font-size: 28px !important;
+        line-height: 38px !important;
+    }
+
+    .comm__txt {
+        font-size: 13px;
+    }
+
+    .join__2 {
+        grid-template-areas:
+            "bx1"
+            "bx2"
+            "bx3"
+            "bx4"
+            ;
+    }
+
+    .join_btn_2 {
+        font-size: 14px;
+    }
+    .sp__par > p {
+        font-size: 13px;
+    }
+
+    .sp__btn__1 {
+        padding: 4px 25px;
+    }
+
+    .set_3 > i {
+        font-size: 28px;
+    }
+
+    .con__title {
+        font-size: 28px !important;
+    }
+
+    .con_1 {
+        font-size: 13px;
+    }
+
+    .sp_link {
+        font-size: 13px;
+        padding: 8px 30px;
+    }
+
+    .ft__caption {
+        flex-direction: column;
+        row-gap: 67px;
+    }
+    .folow__icon {
+        justify-content: center;
+        column-gap: 23px;
+    }
+    .ft__caption {
+        text-align: center;
+    }
+
+    .ft_logo a {
+        margin: auto;
+    }
+
+    .ft__01 li a::before{
+        content: "";
+        margin: auto;
+    }
+
+    .ft__01 li a:hover::before{
+        width: 40%;
+    }
+    
+    .out_bx {
+        width: 100px;
+        margin: auto;
+        padding: 8px;
+    }
+
+    .sp__btn {
+        column-gap: 60px;
+    }
+    .in_bx {
+        width: 100px;
+        height: 100px;
+        margin: auto;
+    }
+    .set_bt > h3 {
+        font-size: 15px;
+    }
+    .set_bt > p {
+        font-size: 12px !important;
+    }
+    .set_3 > i {
+        font-size: 24px;
+    }
+
+    .list_menu li a {
+        font-size: 16px;
+    }
+
+    
+    .toggle i {
+        font-size: 30px;
+    }
+
+    .logo a img {
+        width: 90px;
+        height: 45px;
+    }
+
+    .folow_txt {
+        font-size: 13px;
+    }
+
+    .team__grid {
+        column-gap: 30px;
+    }
+
+    .abt__1 {
+        height:auto;
+    }
+    
+     .about {
+        row-gap: 100px;
+    }
+
+    .tag__icon {
+        width: 2px;
+        height: 280px;
+    }
+
+    .sub__menu__1 {
+        padding: 7px 20px;
+    }
+
+    .sub__menu__1 .sub__1 > i, .menu__1 > i {
+        font-size: 14px;
+    }
+
+    .main__menu .menu__1 {
+        padding: 0px 20px;
+    }
+
+
+
+}
+
+/* ====== For Mobile phones === */
+
+@media only screen and (max-width: 300px)
+{
+    .hr__main > h1 
+    {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    .hr__main > h2 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+   
+    .title .sub__title {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .abt__par {
+        font-size: 13px;
+    }
+
+    .tag__icon {
+        height: 280px;
+    }
+
+    .abt__1 {
+        height:auto;
+    }
+   
+
+    .j_txt {
+        font-size: 13px;
+    }
+
+    .about {
+        row-gap: 100px;
+    }
+    .sp__btn {
+        column-gap: 33px;
+    }
+
+    .sp__btn__1 {
+        font-size: 13px;
+    }
+
+
+    .team__grid {
+        column-gap: 20px;
+    }
+
+
+
+    .sub__menu__1 {
+        padding: 7px 20px;
+    }
+
+    .sub__menu__1 .sub__1 > i, .menu__1 > i {
+        font-size: 14px;
+    }
+
+    .main__menu .menu__1 {
+        padding: 0px 20px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+}
