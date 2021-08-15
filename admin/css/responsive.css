@@ -1,0 +1,31 @@
+/* == create responsiveness for lynx logo */
+
+@media (max-width: 768px) {
+    #logo_sec #side_logo img{
+      max-width: 70px !important;
+      width: 70px !important;
+    }
+
+  }
+
+@media (max-width: 450px) {
+    #logo_sec #side_logo img{
+      max-width: 70px !important;
+      width: 70px !important;
+    }
+
+    .swal2-popup.swal2-toast .swal2-content
+    {
+      font-size: 11px !important;
+    }
+    .swal2-popup {
+      font-size: 11px !important;
+    }
+  }
+
+@media (min-width: 768px) {
+    #logo_sec #side_logo img{
+      max-width: 100px;
+      width: 100px;
+    }
+  }
