@@ -123,7 +123,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['email']) )
                         ?>
 
                          <!-- PROFILE PAGE -->
-                         <h1 class="h3 mb-5 text-gray-800">PROFILE AREA</h1>
+                         <h1 class="h3 mb-5 text-gray-800">Admin Account</h1>
                          <?php  require 'pages/profile.php' ?>
                         <?php
                         }
