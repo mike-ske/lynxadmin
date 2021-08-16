@@ -1,5 +1,5 @@
 <?php
 
-header("location: admin/")
+header("location: admin/index.php")
 
 ?>
