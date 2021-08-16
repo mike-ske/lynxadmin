@@ -27,6 +27,9 @@
       <!-- sweetAlert2 CSS FILE -->
     <link rel="stylesheet" href="../packed/plugins/sweetalert2/sweetalert2.min.css">
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">

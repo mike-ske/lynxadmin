@@ -3,7 +3,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./" id="logo_sec">
                 <div class="sidebar-brand-icon" id="side_logo">
-                    <img src="../img/logo.png" alt="" style="filter: drop-shadow(2px 1px 8px black);">
+                    <img src="img/logo.png" alt="" style="filter: drop-shadow(2px 1px 8px black);">
                 </div>
                 <!-- <div class="sidebar-brand-text mx-3"></div> -->
             </a>
