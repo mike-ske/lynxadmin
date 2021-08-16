@@ -139,7 +139,8 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['email']) )
                           }
                           else if (isset($_SESSION['REQUEST_URI']) == '/lynxadmin/' )
                           {
-                             header('location: errors/404.php');
+                             header('location: pages/home.php');
+                             
                         ?>
                         
                         <?php
