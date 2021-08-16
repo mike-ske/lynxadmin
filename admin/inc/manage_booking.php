@@ -1,4 +1,5 @@
 <?php 
+
 require 'dbconn.php';
 session_start();
 
@@ -25,13 +26,15 @@ if (isset($_POST['send']))
 {
     $name = mysqli_real_escape_string($conn, $_POST['fullname']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $company = mysqli_real_escape_string($conn, $_POST['company']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $message = mysqli_real_escape_string($conn, $_POST['message']);
+    
     $message = strip_tags(htmlspecialchars_decode(htmlentities(trim($message))));
 
-    if (!empty($name) && !empty($email) && !empty($message) )
+    if (!empty($name) && !empty($email) && !empty($message) && !empty($company) && !empty($phone))
     {
 
-        
          // Instantiation and passing `true` enables exceptions
          $mail = new PHPMailer();
 
@@ -47,7 +50,7 @@ if (isset($_POST['send']))
  
          //Recipients
          $mail->setFrom('info@lynxlaboratories.com.ng', 'Lynx Support Service');
-         $mail->addAddress($email, $name);     // Add a recipient
+         $mail->addAddress($email, $phone);     // Add a recipient
          $mail->addAddress($email);               // Name is optional
          $mail->addCC('info@lynxlaboratories.com.ng');
          $mail->addBCC('info@lynxlaboratories.com.ng');
@@ -96,7 +99,8 @@ if (isset($_POST['send']))
                                  max-width: 100%;
                                  height: auto;
                              '>
-                             <h3 style='font-size:14px;font-weight:600'>From - $email</h3>
+                             <h3 style='font-size:14px;font-weight:600'>From - $company</h3>
+                             <h6 style='font-size:13px'>$phone</h6>
                              <h6 style='font-size:13px'>$email</h6>
                              <p style='font-size:12px'>
                                      $message
@@ -162,43 +166,43 @@ if (isset($_POST['send']))
                      <br><br><hr><br><br><strong>Thank you for Trusting in us.</strong>
                      ";
          $mail->send();
-
+ 
          if ($mail->send()) 
          {
-            // Insert data into DATABASE
-            $sql = "INSERT INTO bookings(full_name, email, message) VALUES ('$name', '$email', '$message')";
-            $query = mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));
-            $contact_id = mysqli_insert_id($conn);
-
-                // Insert data into NOTIFICATIONS
-
-                $sql = "INSERT INTO notifications(types, entity_id, viewed) VALUES ('contact', '$contact_id',  1)";
-                mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));
-
-            if ($query) 
-            {
-                $_SESSION['status'] = "Message has been sent! Check your email for confirmation. Thank you for contacting lynxlaboratories";
-                $_SESSION['status_title'] = "Success";
-                $_SESSION['status_code'] = "success";
-                header("location: ../contact.php");   
-                
-            }
-            else 
-            {
-                $_SESSION['status'] = "Failed please check empty field";
-                $_SESSION['status_title'] = "Error";
-                $_SESSION['status_code'] = "error";
-                header("location: ../contact.php");       
-            }
-
+             
+               // Insert data into DATABASE
+               $sql = "INSERT INTO agency(name, email, company, phone, message) VALUES ('$name', '$email',  '$company', '$phone', '$message')";
+               $query = mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));
+               $book_id = mysqli_insert_id($conn);
+               
+               // Insert data into NOTIFICATIONS
+       
+               $sql = "INSERT INTO notifications(types, entity_id, viewed) VALUES ('booking', '$book_id',  1)";
+               mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));
+               
+               if ($query) 
+               {
+                   $_SESSION['status'] = "Thank you for Joining. You'll get feedback from our customer service";
+                   $_SESSION['status_title'] = "Success";
+                   $_SESSION['status_code'] = "success";
+                   header("location: ../bookings.php");    
+               }
+               else 
+               {
+                   $_SESSION['status'] = "Failed! Something went wrong";
+                   $_SESSION['status_title'] = "Error";
+                   $_SESSION['status_code'] = "error";
+                   header("location: ../bookings.php");       
+               }
         }
-      
+
     }
-    else {
+    else 
+    {
             $_SESSION['status'] = "Failed please check empty field";
             $_SESSION['status_title'] = "Error";
             $_SESSION['status_code'] = "error";
-            header("location: ../contact.php");  
+            header("location: ../bookings.php");  
     
     }
 
