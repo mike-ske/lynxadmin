@@ -33,7 +33,6 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="ckeditor/samples/old/sample.css">
 
         <!--========== FAVICONS ===== -->
     <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon//apple-touch-icon.png">

@@ -112,3 +112,43 @@
             </div>
         </div>
     </div>
+
+    <!-- /.modal-dialog -->
+    <!-- ADD CATEGORIES MODAL /.modal-dialog -->
+    <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Category</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- modal form -->
+                <div class="card card-info">
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Enter name">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn btn-primary">Add Category</button>
+                            <button type="submit" class="btn btn-danger float-right" data-dismiss="modal">Cancel</button>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
+                </div>
+                <!-- modal form -->
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->

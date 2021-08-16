@@ -8,6 +8,10 @@
 
   }
 
+.form-group {
+  margin-bottom: 3rem !important;
+}
+
 @media (max-width: 450px) {
     #logo_sec #side_logo img{
       max-width: 70px !important;

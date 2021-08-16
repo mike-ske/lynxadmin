@@ -26,6 +26,8 @@
 <script src="../packed/plugins/toastr/toastr.min.js"></script>
 <script src="js/main.js"></script>
 
+<!-- AdminLTE for demo purposes -->
+<script src="../packed/dist/js/demo.js"></script>
 
 <script>
     // window.Category EventListener('load',function () {
@@ -71,9 +73,7 @@
 <script>
     $(function() {
         // Summernote
-        $('.textarea').summernote("code").replace(/<\/p>/gi, "\n")
-                                        .replace(/<br\/?>/gi, "\n")
-                                        .replace(/<\/?[^>]+(>|$)/g, "")
+        $('.textarea').summernote("code")
         ;
     })
 </script>
