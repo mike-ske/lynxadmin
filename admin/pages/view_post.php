@@ -15,42 +15,44 @@
                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                     <thead>
                         <tr role="row">
-                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 220px;">Name</th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 332px;">Position</th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 160px;">Office</th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 77px;">Age</th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 150px;">Start date</th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 137px;">Salary</th>
+                            <th style="text-align:center;">Id</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Date Published</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
+
+                        <?php
+                            $count = 1;
+                            $row = getAllPost($conn, 20);
+                            foreach ($row as $value) 
+                            {
+                            
+                        ?>
+
                         <tr class="odd">
-                            <td class="sorting_1">Cara Stevens</td>
-                            <td>Sales Assistant</td>
-                            <td>New York</td>
-                            <td>46</td>
-                            <td>2011/12/06</td>
+                            <td class="sorting_1 text-center"><?php echo $count?></td>
+                            <td><?php echo $value['title'] ?></td>
+                            <td><?php echo $value['author'] ?></td>
+                            <td><?php echo getAllCategoryById($conn, $value['category_id']) ?></td>
+                            <td><?php echo convertDate($value['created_date']) ?></td>
                             <td>
                                 <div class="btn-group btn-group-sm">
-                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                    <a href="./?editPost=<?php echo $value['id'] ?>" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#deletePost" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="even">
-                            <td class="sorting_1">Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>
-                                <div class="btn-group btn-group-sm">
-                                    <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                    <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+
+                        <?php
+                            $count++; 
+                            };
+                        ?>
+
                     </tbody>
                 </table>
             </div>

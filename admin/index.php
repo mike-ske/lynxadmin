@@ -2,18 +2,18 @@
 <?php require 'header.php' ?>
 <?php require 'inc/function.php' ?>
 <?php require 'inc/dbconn.php' ?>
-
-<?php 
-
-if (!isset($_SESSION['username']) && !isset($_SESSION['email']) ) 
-{
-    // header('location: auth/login.php');
-}
+<?php require '../redirect.php' ?>
 
 
-
-?>
-
+<!-- ***** Preloader Start ***** -->
+<!-- <div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>   -->
+<!-- ***** Preloader End ***** -->
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -77,6 +77,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['email']) )
                         {
 
                         ?>
+                        
                            <!-- BOOKING PAGE -->
                            <h1 class="h3 mb-5 text-gray-800">BOOKING AREA</h1>
                            <?php  require 'pages/booking.php' ?>
@@ -135,18 +136,41 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['email']) )
                         <h1 class="h3 mb-5 text-gray-800">Edit A Post</h1>
                         <?php  require 'pages/edit_post.php' ?>
 
-                        <?php
-                          }
-                          else if (isset($_SESSION['REQUEST_URI']) == '/lynxadmin/' )
-                          {
-                             header('location: pages/home.php');
-                             
-                        ?>
                         
+                        <?php
+                         }
+                         else if (isset($_GET['readMail']) )
+                         {
+                            
+                        ?>
+                            <!-- EDIT POST PAGE -->
+                            <h1 class="h3 mb-5 text-gray-800">Mail Message</h1>
+                            <?php  require 'views/read_mail.php' ?>
+
+                        <?php
+                            }
+                            else if (isset($_GET['readContact']) )
+                            {
+                        ?>
+                            <!-- EDIT POST PAGE -->
+                            <h1 class="h3 mb-5 text-gray-800">Contacts Message</h1>
+                            <?php  require 'views/read_contact.php' ?>
+
+                        <?php
+
+                            }
+                            else if (isset($_GET['readAgency']) )
+                            {
+                        ?>
+                            <!-- EDIT POST PAGE -->
+                            <h1 class="h3 mb-5 text-gray-800">Agency Message</h1>
+                            <?php  require 'views/read_agency.php' ?>
+
                         <?php
                           }
                           else 
                           {
+                        
                         ?>
                       <!-- MAIN HOME PAGE -->
                       <h1 class="h3 mb-5 text-gray-800">Welcome To Dashboard</h1>

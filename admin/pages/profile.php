@@ -2,7 +2,7 @@
     <div class="card-body box-profile">
         <div class="text-center">
             <img class="profile-user-img img-fluid img-circle" 
-                    src="../packed/dist/img/user4-128x128.jpg" 
+                    src="../packed/dist/img/avatar5.png" 
                     style="border: 3px solid #adb5bd;
                             margin: 0 auto;
                             padding: 3px;

@@ -28,6 +28,7 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="../packed/dist/js/demo.js"></script>
+<script src="../js/main.js"></script>
 
 <script>
     // window.Category EventListener('load',function () {
@@ -47,13 +48,37 @@
 </script>
 
 
-<script src="../ckeditor5/ckeditor.js"></script>
-<script src="../ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="../ckeditor/ckeditor.js"></script>
 
 
-<!-- <script>
+<script>
 	CKEDITOR.replace( 'textarea' );
-</script> -->
+</script>
+
+
+    <?php
+        if (isset($_SESSION['status']) && isset($_SESSION['status_code'])) 
+        {
+    ?>
+     <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom',
+            showConfirmButton: false,
+            timer: 3000
+        })
+
+        Swal.fire({
+            icon: "<?php echo $_SESSION['status_code']?>",
+            text: "<?php echo $_SESSION['status']?>",
+            title: "<?php echo $_SESSION['status_title']?>",
+            showConfirmButton: true,
+        });
+    </script>
+    <?php 
+        unset($_SESSION['status']);
+    }; 
+    ?>
 
 <script>
 	// ClassicEditor
@@ -71,11 +96,11 @@
 </script>
 
 <script>
-    $(function() {
-        // Summernote
-        $('.textarea').summernote("code")
-        ;
-    })
+    // $(function() {
+    //     // Summernote
+    //     $('.textarea').summernote("code")
+    //     ;
+    // })
 </script>
 
 

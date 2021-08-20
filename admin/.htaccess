@@ -20,14 +20,14 @@ RewriteEngine on
 RewriteBase /
 
 # Redirect the user to 404 error page when the URI is invalid
-ErrorDocument 404 https://lynxsite.herokuapp.com/0/errors/404.php
+ErrorDocument 404 https://lynxadmin.herokuapp.com/admin/errors/404.php
 
 RewriteCond %{REQUEST_URI} ^/404/$
-RewriteRule ^(.*)$ https://lynxsite.herokuapp.com/0/errors/404.php [L]
+RewriteRule ^(.*)$ https://lynxadmin.herokuapp.com/admin/errors/404.php [L]
 
-ErrorDocument 400 https://lynxsite.herokuapp.com/0/errors/400.php
+ErrorDocument 400 https://lynxadmin.herokuapp.com/admin/errors/400.php
 
 # Redirect the user to 400 error page when the URI is invalid
 
 RewriteCond %{REQUEST_URI} ^/400/$
-RewriteRule ^(.*)$ https://lynxsite.herokuapp.com/0/ [L]
+RewriteRule ^(.*)$ https://lynxadmin.herokuapp.com/admin/ [L]

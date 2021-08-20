@@ -88,6 +88,23 @@ function getAllCategoryById($db, $post_id)
     }
  
 }
+
+function getAllPostById($db, $post_id)
+{
+    $sql = "SELECT * FROM post WHERE id = $post_id";
+    $query = mysqli_query($db, $sql) or die("Failed to get category from database!" . mysqli_error($db));
+    $data = array();
+    // === loop through each table rows
+    while ($row =  mysqli_fetch_assoc($query)) 
+    {
+        $data[] = $row;
+    }
+    foreach($data as $post)
+    {
+        return $data;
+    }
+ 
+}
 function getPostImageById($db, $post_id)
 {
     $sql = "SELECT * FROM `images` WHERE `post_id` = '$post_id' ";
