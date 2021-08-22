@@ -139,8 +139,8 @@
             toast: true,
             position: 'top',
             showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
+            // timer: 3000,
+            // timerProgressBar: true,
         })
 
         Toast.fire({
