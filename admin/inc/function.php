@@ -13,6 +13,21 @@ function getAllCategory($db)
     return $data;
 }
 
+function getAdminAccount($db)
+{
+    $sql = "SELECT * FROM admin_acct";
+    $query = mysqli_query($db, $sql) or die("Failed to get category from database!" . mysqli_error($db));
+    $data = array();
+    // === loop through each table rows
+    while ($row =  mysqli_fetch_assoc($query)) {
+        $data[] = $row;
+    }
+    foreach($data as $post)
+    {
+        return $post;
+    }
+}
+
 function selectAllCategory($db) 
 {
     $sql = "SELECT * FROM category";
@@ -46,6 +61,48 @@ function getAllPost($db, $limit)
     return $data;
 }
 
+function getAllAgent($db, $limit)
+{
+    $sql = "SELECT * FROM agency ORDER BY id DESC LIMIT $limit ";
+    $query = mysqli_query($db, $sql) or die("Failed to get AGENCY DATA from database!" . mysqli_error($db));
+    $data = array();
+
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        echo "<h6 class='text-center m-5'>No Records found</h6>";
+    }
+    // === loop through each table rows
+    while ($row =  mysqli_fetch_assoc($query)) {
+        $data[] = $row;
+    }
+    foreach($data as $post)
+    {
+        return $post;
+    }
+}
+
+function getAllMails($db, $limit)
+{
+    $sql = "SELECT * FROM mails ORDER BY id DESC LIMIT $limit ";
+    $query = mysqli_query($db, $sql) or die("Failed to get MAIL DATA from database!" . mysqli_error($db));
+    $data = array();
+
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        echo "<h6 class='text-center m-5'>No Records found</h6>";
+    }
+    // === loop through each table rows
+    while ($row =  mysqli_fetch_assoc($query)) {
+        $data[] = $row;
+    }
+    foreach($data as $post)
+    {
+        return $post;
+    }
+}
+
 function getPost($db, $limit)
 {
     $sql = "SELECT * FROM post ORDER BY  category_id DESC LIMIT $limit ";
@@ -76,9 +133,21 @@ function getAllCategoryByLim($db, $limit)
     return $data;
 }
 
+function getCategory($db)
+{
+    $sql = "SELECT * FROM category";
+    $query = mysqli_query($db, $sql) or die("Failed to get category from database!" . mysqli_error($db));
+    $data = array();
+    // === loop through each table rows
+    while ($row =  mysqli_fetch_assoc($query)) {
+        $data[] = $row;
+    }
+    return $data;
+}
+
 function getAllCategoryById($db, $post_id)
 {
-    $sql = "SELECT * FROM category WHERE id = $post_id";
+    $sql = "SELECT * FROM category WHERE id = '$post_id' ";
     $query = mysqli_query($db, $sql) or die("Failed to get category from database!" . mysqli_error($db));
     // $data = array();
     // === loop through each table rows
@@ -230,7 +299,7 @@ function paginator($page, $rows_per_page, $db, $table)
    
     if ($num_rows == 0 || !isset($num_rows)) 
     {
-        echo "<h3 class='text-center m-5'>No Records found</h3>";
+        echo "<h6 class='text-center m-5'>No Records found</h6>";
     }
     foreach ($query_1 as $row) {
         
@@ -257,11 +326,13 @@ function paginatorLink($row_par_page, $link_page, $db, $table)
     for ($i=1; $i < $total_pages; $i++) 
     { 
         echo "<li class='paginate_button page-item previous' id='dataTable_previous'>
-                    <a href='$link_page?page=$i' aria-controls='dataTable' class='page-link'>".$i."</a>
+                    <a href='$link_page=$i' aria-controls='dataTable' class='page-link'>".$i."</a>
                 </li>
                 ";
     }
 }
+
+
 
 function nextPage($row_par_page, $db, $table)
 {
@@ -310,7 +381,29 @@ function getBookingsById($db, $bk_id)
             return $post;
         }
     }
-   
+}
+
+
+function getAllBookings($db, $limit = "")
+{ 
+    $sql = "SELECT * FROM bookings ORDER BY id DESC LIMIT $limit";
+    $query = mysqli_query($db, $sql) or die("Failed to get BOOKINGS from database " . mysqli_error($db));
+    $data = array();
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        echo "<h6 class='text-center m-5'>No Contacts Records found</h6>";
+    }
+    // === loop through each table rows
+    while ($row = mysqli_fetch_assoc($query)) 
+    {
+        $data[] = $row;
+    }
+    return $data; 
+        // foreach ($data as $post) {
+        //     return $post;
+        // }
+    
 }
 
 function cutString($text)

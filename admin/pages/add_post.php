@@ -2,8 +2,8 @@
 <div class="col-md-12 mb-5">
     <div class="card card-primary card-outline">
         <div class="card-header row">
-            <h3 class="card-title col-md-6">Add Post</h3>
-            <div class="tex-right float-rihgt col-md-6" style="align-items: center;display: flex;justify-content: flex-end;">
+            <h3 class="card-title col-md-6 col-sm-6">Add Post</h3>
+            <div class="tex-right float-rihgt col-md-6 col-sm-6" style="align-items: center;display: flex;justify-content: flex-end;">
                 <a href="#" data-toggle="modal" data-target="#modal-lg-video" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                     <i class="fas fa-upload fa-sm text-white-50"></i> Upload Videos
                 </a>
@@ -45,12 +45,13 @@
                             <option></option>
                             <?php 
 
-                                $row = getAllCategory($conn);
+                                $row = getCategory($conn);
+                               
                                 foreach ($row as $value)
                                 {
                                   
                             ?>
-                            <option value="<?php echo  $value['id']?>" ><?php echo  $value['cat_name']?></option>
+                            <option value="<?php echo $value['id']?>" ><?php echo  $value['cat_name']?></option>
 
                             <?php };?>
                         </select>

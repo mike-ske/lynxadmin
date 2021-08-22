@@ -1,7 +1,7 @@
 <?php 
 
 require 'dbconn.php';
-session_start();
+
 
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -17,22 +17,21 @@ use PHPMailer\PHPMailer\Exception;
 
 // Load Composer's autoloader
 
-require '../vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 
 
-
-if (isset($_POST['send']))
+if (isset($_POST['update']))
 {
-    $name = mysqli_real_escape_string($conn, $_POST['fullname']);
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $company = mysqli_real_escape_string($conn, $_POST['company']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $message = mysqli_real_escape_string($conn, $_POST['message']);
-    
-    $message = strip_tags(htmlspecialchars_decode(htmlentities(trim($message))));
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $aggree = mysqli_real_escape_string($conn, $_POST['aggree']);
 
-    if (!empty($name) && !empty($email) && !empty($message) && !empty($company) && !empty($phone))
+    
+    $name = strip_tags(htmlspecialchars_decode(htmlentities(trim($name))));
+
+    if (!empty($name) && !empty($email) && !empty($password) && !empty($aggree))
     {
 
          // Instantiation and passing `true` enables exceptions
@@ -49,15 +48,15 @@ if (isset($_POST['send']))
          $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
  
          //Recipients
-         $mail->setFrom('info@lynxlaboratories.com.ng', 'Lynx Support Service');
-         $mail->addAddress($email, $phone);     // Add a recipient
+         $mail->setFrom('info@lynxlaboratories.com.ng', 'Security Notification - Lynx');
+         $mail->addAddress($name);     // Add a recipient
          $mail->addAddress($email);               // Name is optional
          $mail->addCC('info@lynxlaboratories.com.ng');
          $mail->addBCC('info@lynxlaboratories.com.ng');
  
          // Content
          $mail->isHTML(true);                                  // Set email format to HTML
-         $mail->Subject = 'AGENCY Information';
+         $mail->Subject = 'Lynxlaboratory - Security Notification';
          $mail->Body    = "
                      <div class='container' style='
                          font-family: 'roboto';
@@ -89,8 +88,10 @@ if (isset($_POST['send']))
                                  font-size: 14px;
                              '>
  
-                             <b><strong>Reply to $name </strong></b> <br><br>
-                             <p style='line-height: 20px;'> Dear <b>$name</b> We have recieved your request and we are Happy to respond to your request shortly.<br><br></p>
+                             <b><strong>Activity notification to $name </strong></b> <br><br>
+                             <p style='line-height: 20px;'> Dear <b>$name</b>, <br><br>There was some activity in your lynxadmin account. This is to Notify you that your Admin 
+                             Account has been updated. Information on what type of change occurred is available below
+                             your Account details:<br><br></p>
                              
                              <p>
                              </div>
@@ -99,11 +100,16 @@ if (isset($_POST['send']))
                                  max-width: 100%;
                                  height: auto;
                              '>
-                             <h3 style='font-size:14px;font-weight:600'>From - $company</h3>
-                             <h6 style='font-size:13px'>$phone</h6>
-                             <h6 style='font-size:13px'>$email</h6>
+                             <h6 style='font-size:14px;font-weight:500 margin-bottom:10px'>----Name: $name</h6>
+                             <h6 style='font-size:13px margin-bottom:10px'>----Email: $email<</h6>
+                             <h6 style='font-size:13px margin-bottom:10px'>----Password: $password<</h6>
+                             <hr>
                              <p style='font-size:12px'>
-                                     $message
+                                Here at lynxlaboratories, your protection is our priority and we ensure that your
+                                data / account information is safe. We guranty  you of Maximum Security. If you feel this mail is 
+                                inappropriate and incorrect, you can login to your lynxadmin account and confirm your login Identity or Report
+                                to any of our customer services at lynxlaboratories for further enquiries.
+                        
                              </p>
                              </div>
                              <div class='foot' style='
@@ -169,30 +175,27 @@ if (isset($_POST['send']))
  
          if ($mail->send()) 
          {
-             
+                $pass = password_hash($password, PASSWORD_DEFAULT);
                // Insert data into DATABASE
-               $sql = "INSERT INTO agency(name, email, company, phone, message) VALUES ('$name', '$email',  '$company', '$phone', '$message')";
+               $sql = "UPDATE  `admin_acct` SET `admin_name`='$name', `email`='$email', `password`='$pass' ";
                $query = mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));
                $book_id = mysqli_insert_id($conn);
                
                // Insert data into NOTIFICATIONS
        
-               $sql = "INSERT INTO notifications(types, entity_id, viewed) VALUES ('booking', '$book_id',  1)";
-               mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));
-               
                if ($query) 
                {
-                   $_SESSION['status'] = "Thank you for Joining. You'll get feedback from our customer service";
+                   $_SESSION['status'] = "Success! Account Updated";
                    $_SESSION['status_title'] = "Success";
                    $_SESSION['status_code'] = "success";
-                   header("location: ../bookings.php");    
+                   header("location: ../?profile");    
                }
                else 
                {
                    $_SESSION['status'] = "Failed! Something went wrong";
                    $_SESSION['status_title'] = "Error";
                    $_SESSION['status_code'] = "error";
-                   header("location: ../bookings.php");       
+                   header("location: ../?profile");       
                }
         }
 
@@ -202,7 +205,7 @@ if (isset($_POST['send']))
             $_SESSION['status'] = "Failed please check empty field";
             $_SESSION['status_title'] = "Error";
             $_SESSION['status_code'] = "error";
-            header("location: ../bookings.php");  
+            header("location: ../?profile");  
     
     }
 

@@ -45,6 +45,8 @@
 
                         if (isset($_GET['allPost'])) 
                         {
+                            $id = $_GET['allPost'];
+                      
                         ?>
                         <!-- VIEW ALL POST PAGE -->
                         <h1 class="h3 mb-5 text-gray-800">Available Post</h1> 
@@ -75,7 +77,7 @@
                         }
                         elseif (isset($_GET['booking'])) 
                         {
-
+                            $id = $_GET['booking']
                         ?>
                         
                            <!-- BOOKING PAGE -->
@@ -87,7 +89,7 @@
                         }
                         else if (isset($_GET['agency'])) 
                         {
-                           
+                           $id = $_GET['agency'];
 
                         ?>
                         
@@ -99,7 +101,7 @@
                         }
                         else if (isset($_GET['inbox'])) 
                         {
-                            
+                            $id = $_GET['inbox']
                         ?>
                         
                         <!-- MAILS PAGE -->

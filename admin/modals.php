@@ -29,15 +29,13 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="color: #333;">Are you sure you want to delete Booking?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">�</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Delete" below if you are ready to delete or press cancel to terminate session.</div>
                 <div class="modal-footer">
                     <a class="btn btn-secondary" href="./?booking" type="button" data-dismiss="modal">Cancel</a>
-                    <a class="btn btn-primary" href="inc/delete_booking.php?id=<br />
-<b>Notice</b>:  Undefined variable: value in <b>C:\xampp\htdocs\lynxadmin\admin\footer.php</b> on line <b>38</b><br />
-">Delete</a>
+                    <a class="btn btn-primary" href="inc/delete_booking?id=<?php echo $values['id']?>">Delete</a>
                 </div>
             </div>
         </div>
@@ -51,15 +49,13 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="color: #333;">Are you sure you want to delete Agency?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">�</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Delete" below if you are ready to delete or press cancel to terminate session.</div>
                 <div class="modal-footer">
                     <a class="btn btn-secondary" href="./?agency" type="button" data-dismiss="modal">Cancel</a>
-                    <a class="btn btn-primary" href="inc/delete_agent.php?id=<br />
-<b>Notice</b>:  Undefined variable: value in <b>C:\xampp\htdocs\lynxadmin\admin\footer.php</b> on line <b>58</b><br />
-">Delete</a>
+                    <a class="btn btn-primary" href="inc/delete_agency.php?id=<?php echo $values['id']?>">Delete</a>
                 </div>
             </div>
         </div>
@@ -67,21 +63,19 @@
     <!-- Delete agent Modal-->
 
     <!-- Delete Modal-->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteMail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="color: #333;">Are you sure you want to delete mail?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">�</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Delete" below if you are ready to delete or press cancel to terminate session.</div>
                 <div class="modal-footer">
                     <a class="btn btn-secondary" href="./?inbox" type="button" data-dismiss="modal">Cancel</a>
-                    <a class="btn btn-primary" href="inc/delete_mail.php?id=<br />
-<b>Notice</b>:  Undefined variable: value in <b>C:\xampp\htdocs\lynxadmin\admin\footer.php</b> on line <b>78</b><br />
-">Delete</a>
+                    <a class="btn btn-primary" href="inc/delete_mail?id=<?php echo $values['id']?>">Delete</a>
                 </div>
             </div>
         </div>
@@ -95,7 +89,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">�</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -136,7 +130,7 @@
                             </div>
                         </div>
                         <!-- /.card-body -->
-                        <div class="modal-footer justify-content-between">
+                        <div class="modal-footer">
                             <button type="submit" name="send" class="btn btn btn-primary">Add Category</button>
                             <button type="submit" class="btn btn-danger float-right" data-dismiss="modal">Cancel</button>
                         </div>
@@ -186,7 +180,7 @@
 
                         </div>
                         <!-- /.card-body -->
-                        <div class="modal-footer justify-content-between">
+                        <div class="modal-footer">
                             <button type="submit" name="send" class="btn btn btn-primary">Upload</button>
                             <button type="submit" class="btn btn-danger float-right" data-dismiss="modal">Cancel</button>
                         </div>
@@ -217,16 +211,16 @@
                 <div class="card card-info">
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="views/mail_agent" method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group mb-5">
-                                <input class="form-control" placeholder="To:">
+                                <input class="form-control" type="email" name="email" placeholder="To:" value="<?php echo $_SESSION['agt_mail']?>">
                             </div>
                             <div class="form-group mb-5">
-                                <input class="form-control" placeholder="Subject:">
+                                <input class="form-control"type="text" name="subject" placeholder="Subject:">
                             </div>
                             <div class="form-group mb-5">
-                                <textarea id="compose-textarea" class="form-control" style="height: 200px" placeholder="Enter message here"></textarea>
+                                <textarea id="compose-textarea" name="message" class="form-control" style="height: 200px" placeholder="Enter message here"></textarea>
                             </div>
 
                             <div class="row">
@@ -234,7 +228,7 @@
                                     <label for="exampleInputFile">Attach File</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <input type="file" name="file" class="custom-file-input" id="exampleInputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>
@@ -243,8 +237,8 @@
 
                         </div>
                         <!-- /.card-body -->
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn btn-primary">Send</button>
+                        <div class="modal-footer ">
+                            <input type="submit" name="send" class="btn btn btn-primary" value="Send">
                             <button type="reset" class="btn btn-danger float-right" data-dismiss="modal">Cancel</button>
                         </div>
                         <!-- /.card-footer -->
@@ -273,16 +267,16 @@
                 <div class="card card-info">
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="views/mail_booking" method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group mb-5">
-                                <input class="form-control" placeholder="To:">
+                                <input type="email"  class="form-control" name="email" placeholder="To:" value="<?php echo $_SESSION['bk_mail'] ?>">
                             </div>
                             <div class="form-group mb-5">
-                                <input class="form-control" placeholder="Subject:">
+                                <input  type="text" class="form-control" name="subject" placeholder="Subject:">
                             </div>
                             <div class="form-group mb-5">
-                                <textarea id="compose-textarea" class="form-control" style="height: 200px" placeholder="Enter message here"></textarea>
+                                <textarea id="compose-textarea" name="message" class="form-control" style="height: 200px" placeholder="Enter message here"></textarea>
                             </div>
 
                             <div class="row">
@@ -290,7 +284,7 @@
                                     <label for="exampleInputFile">Attach File</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <input type="file" name="file" class="custom-file-input" id="exampleInputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>
@@ -299,8 +293,8 @@
 
                         </div>
                         <!-- /.card-body -->
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn btn-primary">Send</button>
+                        <div class="modal-footer ">
+                            <button type="submit" name="send" class="btn btn btn-primary">Send</button>
                             <button type="reset" class="btn btn-danger float-right" data-dismiss="modal">Cancel</button>
                         </div>
                         <!-- /.card-footer -->
@@ -314,31 +308,31 @@
     <!-- /.modal-dialog -->
 
     <!-- /.modal-dialog -->
-    <!-- ADD REPLAY AGENCY MODAL /.modal-dialog -->
+    <!-- ADD REPLAY MAILS MODAL /.modal-dialog -->
     <div class="modal fade" id="modal-lg-reply-mail">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Reply Agency Message</h4>
+                    <h4 class="modal-title">Reply Mails Message</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
 
                 </div>
-                <!-- modal form -->
+                <!-- modal  form -->
                 <div class="card card-info">
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="#" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="views/send_mail.php" method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group mb-5">
-                                <input class="form-control" placeholder="To:">
+                                <input type="email"  name="email" class="form-control" placeholder="To:" value="<?php echo $_SESSION['mails']?>">
                             </div>
                             <div class="form-group mb-5">
-                                <input class="form-control" placeholder="Subject:">
+                                <input type="text" name="subject" class="form-control" placeholder="Subject:">
                             </div>
                             <div class="form-group mb-5">
-                                <textarea id="compose-textarea" class="form-control" style="height: 200px" placeholder="Enter message here"></textarea>
+                                <textarea id="compose-textarea" name="message"class="form-control" style="height: 200px" placeholder="Enter message here"></textarea>
                             </div>
 
                             <div class="row">
@@ -346,7 +340,7 @@
                                     <label for="exampleInputFile">Attach File</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <input type="file" name="file" class="custom-file-input" id="exampleInputFile">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>
@@ -355,8 +349,8 @@
 
                         </div>
                         <!-- /.card-body -->
-                        <div class="modal-footer justify-content-between">
-                            <button type="submit" class="btn btn btn-primary">Send</button>
+                        <div class="modal-footer ">
+                            <button type="submit" name="send" class="btn btn btn-primary">Send</button>
                             <button type="reset" class="btn btn-danger float-right" data-dismiss="modal">Cancel</button>
                         </div>
                         <!-- /.card-footer -->

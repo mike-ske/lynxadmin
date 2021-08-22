@@ -35,7 +35,7 @@ if (isset($_POST['send'])) {
         $encode_image = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
 
 
-        $sql_1 = "UPDATE images SET `img_name`=$encode_image WHERE `post_id` = '$post_id' ";
+        $sql_1 = "UPDATE images SET `img_name`='$encode_image' WHERE `post_id` = '$post_id' ";
         mysqli_query($conn, $sql_1) or die("Failed to insert to database!" . mysqli_error($conn));
 
         if ($query) {
@@ -75,7 +75,7 @@ if (isset($_POST['send'])) {
                     <input class="form-control" name="author"  value="<?php echo $value['author'] ?>" placeholder="Author:">
                 </div>
                 <div class="form-group mb-5">
-                    <div class="alert alert-danger alert-dismissible">
+                    <div class="alert alert-danger alert-dismissible" style="font-size: 12px;">
                         <h5><i class="icon fas fa-exclamation-triangle"></i> Please Note!</h5>
                         Ensure to delete or backspace empty text-box
                         before typing to start
@@ -117,7 +117,7 @@ if (isset($_POST['send'])) {
                 <!-- /.card-body -->
                 <div class="card-footer row w-100">
                     <div class="float-left col-md-6">
-                        <button type="submit" name="send" class="btn btn-primary"><i class="far fa-send"></i> Add Post</button>
+                        <button type="submit" name="send" class="btn btn-primary"><i class="far fa-send"></i> Update Post</button>
                     </div>
                     <div class="text-right col-md-6">
                         <button type="reset" class="btn btn-danger"><i class="fas fa-times"></i> Discard</button>

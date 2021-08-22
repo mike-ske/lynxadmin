@@ -27,15 +27,27 @@
                     <tbody>
 
                         <?php
+                            
+                            // get the page id
+                            if ($id) 
+                            {
+                                $page =  $id;
+                                echo $page;
+                            }
+                            else
+                            {
+                                $page = 1;
+
+                            }   
                             $count = 1;
-                            $row = getAllPost($conn, 20);
+                            $row = paginator($page, 6, $conn, 'post');
                             foreach ($row as $value) 
                             {
                             
                         ?>
 
                         <tr class="odd">
-                            <td class="sorting_1 text-center"><?php echo $count?></td>
+                            <td class="text-center"><?php echo $count?></td>
                             <td><?php echo $value['title'] ?></td>
                             <td><?php echo $value['author'] ?></td>
                             <td><?php echo getAllCategoryById($conn, $value['category_id']) ?></td>
@@ -60,14 +72,45 @@
         <!--  ======== START PAGINATION ==========  -->
         <div class="row">
             <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
-                    Showing 1 to 10 of 57 entries
+                <div class="dataTables_info mr-2" id="dataTable_info" role="status" aria-live="polite">
+                    <?php echo  $_SESSION['liveShow']?>
                 </div>
             </div>
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                     <ul class="pagination">
-                            <!-- paginations -->
+                                <!-- == create the pagination == -->
+                        <?php                    
+                            if ($page > 1) 
+                            {
+                                $calc = ($page-1);
+                                echo "<li class='paginate_button page-item previous' id='dataTable_previous'>
+                                        <a href='./?allPost=$calc' aria-controls='dataTable' data-dt-idx='1' tabindex='0' class='page-link'>
+                                            <i class='fa fa-angle-double-left'></i>
+                                        </a>
+                                        </li>
+                                        ";
+                            
+                            }
+
+                            echo paginatorLink(6, './?allPost', $conn, 'post');
+                            
+                            $total_pages = nextPage(6, $conn, 'post');
+                            for ($i=1; $i < $total_pages; $i++) 
+                            { 
+                                $i;
+                            }
+                            if ($i > $page) 
+                            {
+                                $calc = ($page+1);
+                                echo  "<li class='paginate_button page-item previous' id='dataTable_previous'>
+                                                <a href='./?allPost=$calc' aria-controls='dataTable' data-dt-idx='1' tabindex='0' class='page-link'>
+                                                <i class='fa fa-angle-double-right'></i>
+                                                </a>
+                                        </li>";
+                            }
+
+                        ?>
                     </ul>
                 </div>
             </div>

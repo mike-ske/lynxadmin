@@ -9,7 +9,7 @@ if (isset($_POST['send']))
     $title = mysqli_real_escape_string($conn, html_entity_decode($_POST['title']));
     $author = mysqli_real_escape_string($conn, html_entity_decode($_POST['author']));
     $message = mysqli_real_escape_string($conn, html_entity_decode($_POST['message']));
-    $cat_name = mysqli_real_escape_string($conn, html_entity_decode($_POST['message']));
+    $cat_name = mysqli_real_escape_string($conn, html_entity_decode($_POST['cat_name']));
     $image =  $_FILES['image'];
     
 
@@ -25,13 +25,13 @@ if (isset($_POST['send']))
             $tmp_name= $_FILES['image']['tmp_name'];
 
             $encode_image = base64_encode(file_get_contents($_FILES['image']['tmp_name']));
-         
-
-            $sql = "INSERT INTO images(post_id, img_name) VALUES ('$post_id', '$encode_image')";
-            mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));
-
+           
+           
             if ($query) 
             {
+                $sql_1 = "INSERT INTO `images`(`post_id`, `img_name`) VALUES ('$post_id', '$encode_image')";
+                $query_1 = mysqli_query($conn, $sql_1) or die("Failed to insert IMAGE to database!" . mysqli_error($conn));
+    
                 $_SESSION['status'] = "Success! Post Added";
                 $_SESSION['status_title'] = "Success";
                 $_SESSION['status_code'] = "success";
