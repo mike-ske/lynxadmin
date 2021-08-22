@@ -38,29 +38,32 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">
+                    <?php 
+                        $num1 = getContactNotif($conn);
+                        $num2 = getBookNotif($conn);
+                        if (isset($num1) && isset($num2))
+                        {
+                            $total = $num1 + $num2;
+                            echo $total;  
+                        }
+                                             
+                    ?>
+                </span>
                 
-                                
             </a>
             <!-- Dropdown - Alerts -->
             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                     Notification
                 </h6>
-                <h6 class='text-center m-5'>No New Notification Post found</h6>
-                    <a class='dropdown-item d-flex align-items-center' href='./?notification'>
-                            <div class='mr-3'>
-                                <div class='icon-circle bg-primary'>
-                                    <i class='fas fa-file-alt text-white'></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class='small text-gray-500'>15 August 2021 02:07:23am</div>
-                                <div class='small text-gray-300'>MISOCOL NIG LTD</div>
-                                <span class='font-weight-bold'>Conditional exe...</span>
-                            </div>
-                        </a>
+                <!-- <h6 class='text-center m-5'>No New Notification Post found</h6> -->
+                <?php 
+                    echo get_New_Notifications($conn, 'contact');
+                    echo get_New_Notifications($conn, 'booking');
+                ?>
                     
-                                        <a class="dropdown-item text-center small text-gray-500" href="./?notification">Show All Alerts</a>
+                <a class="dropdown-item text-center small text-gray-500" href="./?notification">Show All Alerts</a>
             </div>
         </li>
 
@@ -70,7 +73,7 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                
+                <span class="badge badge-danger badge-counter"><?php echo getMailNotif($conn); ?></span>
                                 
             </a>
             <!-- Dropdown - Messages -->
@@ -79,7 +82,12 @@
                 <h6 class="dropdown-header">
                     Message Center
                 </h6>
-                <h6 class='text-center m-5'>No New Notification Post found</h6>            <a class="dropdown-item text-center small text-gray-500" href="./?notification">Read More Messages</a>
+                <?php 
+                    echo get_New_Notifications($conn, 'mail');
+                ?>
+                
+
+                <a class="dropdown-item text-center small text-gray-500" href="./?notification">Read More Messages</a>
             </div>
         </li>
 
@@ -89,8 +97,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    Monatech            </span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['ad_name'] ?></span>
                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
             </a>
             <!-- Dropdown - User Information -->

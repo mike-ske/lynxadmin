@@ -18,14 +18,14 @@ $row = getAdminAccount($conn);
                     alt="User profile picture">
         </div>
 
-        <h3 class="profile-username text-center">Monatech</h3>
+        <h3 class="profile-username text-center"><?php echo $row['admin_name']?></h3>
 
         <p class="text-muted text-center">Admin</p>
 
         <div class="tab-pane active" id="settings">
             <form class="form-horizontal" action="inc/manage_profile" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
-                    <label for="inputName" class="col-sm-2 col-form-label"><?php echo $row['admin_name']?></label>
+                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
                         <input type="text" name="name" class="form-control" value="<?php echo $row['admin_name']?>" id="inputName" placeholder="Name">
                     </div>

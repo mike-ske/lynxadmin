@@ -14,8 +14,8 @@ function getAllCategory($db)
 }
 
 function getAdminAccount($db)
-{
-    $sql = "SELECT * FROM admin_acct";
+{; // Get the total number for each notification   
+     $sql = "SELECT * FROM admin_acct";
     $query = mysqli_query($db, $sql) or die("Failed to get category from database!" . mysqli_error($db));
     $data = array();
     // === loop through each table rows
@@ -80,6 +80,25 @@ function getAllAgent($db, $limit)
     {
         return $post;
     }
+}
+
+function getTotalAgent($db, $limit)
+{
+    $sql = "SELECT * FROM agency ORDER BY id DESC LIMIT $limit ";
+    $query = mysqli_query($db, $sql) or die("Failed to get AGENCY DATA from database!" . mysqli_error($db));
+    $data = array();
+
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        echo "<h6 class='text-center m-5'>No Records found</h6>";
+    }
+    // === loop through each table rows
+    while ($row =  mysqli_fetch_assoc($query)) {
+        $data[] = $row;
+    }
+   
+    return $data;
 }
 
 function getAllMails($db, $limit)
@@ -172,8 +191,42 @@ function getAllPostById($db, $post_id)
     {
         return $data;
     }
- 
 }
+
+function getTotalRecord($db, $table)
+{
+    $sql = "SELECT * FROM $table ";
+    $query = mysqli_query($db, $sql) or die("Failed to get category from database!" . mysqli_error($db));
+    $num_rows = mysqli_num_rows($query);
+    // === loop through each table rows
+    
+    return $num_rows;
+}
+
+
+function getTotalRecordById($db, $table, $id)
+{
+    $sql = "SELECT * FROM $table WHERE id = $id";
+    $query = mysqli_query($db, $sql) or die("Failed to get category from database!" . mysqli_error($db));
+    $num_rows = mysqli_num_rows($query);
+    // === loop through each table rows
+    $num_rows = mysqli_num_rows($query);
+    // if ($num_rows == 0 || !isset($num_rows)) 
+    // {
+    //     // echo "<h6 class='text-center m-5'>No $table Records found</h6>";
+    // }
+
+    $data = array();
+    // === loop through each table rows
+    while ($row =  mysqli_fetch_assoc($query)) {
+        $data[] = $row;
+    }
+    foreach ($data as $catValue) {
+        return $catValue;
+    }
+}
+
+
 function getPostImageById($db, $post_id)
 {
     $sql = "SELECT * FROM `images` WHERE `post_id` = '$post_id' ";
@@ -422,5 +475,268 @@ function convertDate($date = '')
 }
 
 
+
+function getAllNotification($db)
+{
+    $sql = "SELECT * FROM notifications WHERE viewed = 1";
+    $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+    // $data = array();
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        echo "<h6 class='text-center m-5'>No NOTIFICATION Records found</h6>";
+    }
+    // === loop through each table rows
+    return $num_rows;  
+}
+
+function getNotifEntityId($db, $type)
+{
+    $sql = "SELECT * FROM notifications WHERE types = '$type' AND viewed = 1 ORDER BY entity_id DESC ";
+    $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+    // $data = array();
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows > 1) 
+    {
+           // === loop through each table rows
+            while ($row = mysqli_fetch_assoc($query)) 
+            {
+                $data[] = $row;
+            }
+            return $data;
+    }
+    else
+    {
+        echo "";
+    }
+
+    
+}
+
+
+
+
+function get_New_Notifications($db, $table)
+{
+    $nums = array();
+    if ($table === 'mail') 
+    {
+        $row1 = getNotifEntityId($db, 'mail');
+        if (isset($row1)) 
+        {
+            foreach ($row1 as $value) 
+            {
+                $nums[] = $value['entity_id']; // GET Entity ID For each notification
+            
+                $record = getTotalRecordById($db, 'mails', $value['entity_id']);
+
+                echo "<a class='dropdown-item d-flex align-items-center' href='./?notification'>
+                        <div class='dropdown-list-image mr-3'>
+                            <img class='rounded-circle' src='img/undraw_profile_1.svg'>
+                            <div class='status-indicator bg-success'></div>
+                        </div>
+                        <div class='font-weight-bold'>
+                            <div class='small text-gray-500'>". convertDate($record['created_date'])."</div>
+                            <div class='small text-gray-500'>". $record['email']. "</div>
+                            <div class='text-truncate'>". substr($record['message'], 0, 30)."..."."</div>
+                        </div>
+                    </a>";
+                
+            }
+        }
+
+        $_SESSION['num_notif'] = count($nums); // Get the total number for each notification
+    }
+    elseif ($table === 'contact') 
+    {
+        $row1 = getNotifEntityId($db, 'contact');
+        if (isset($row1)) 
+        {
+            foreach ($row1 as $value) 
+            {
+                $nums[] = $value['entity_id']; // GET Entity ID For each notification
+            
+                $record = getTotalRecordById($db, 'bookings', $value['entity_id']);
+                
+                echo "<a class='dropdown-item d-flex align-items-center' href='./?notification'>
+                    <div class='mr-3'>
+                        <div class='icon-circle bg-primary'>
+                            <i class='fas fa-file-alt text-white'></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class='small text-gray-500'>". convertDate($record['created_date'])."</div>
+                        <div class='small text-gray-300'>". $record['full_name']."</div>
+                        <span class='font-weight-bold'>". substr($record['message'], 0, 30)."..."."</span>
+                    </div>
+                </a>";
+            }
+        }
+       
+        $_SESSION['num_notif'] = count($nums); // Get the total number for each notification
+    }
+    elseif ($table === 'booking') 
+    {
+        $row1 = getNotifEntityId($db, 'booking');
+        if(isset($row1))
+        {
+            foreach ($row1 as $value) 
+            {
+                $nums[] = $value['entity_id']; // GET Entity ID For each notification
+            
+                $record = getTotalRecordById($db, 'agency', $value['entity_id']);
+            
+            
+                echo "<a class='dropdown-item d-flex align-items-center' href='./?notification'>
+                        <div class='mr-3'>
+                            <div class='icon-circle bg-primary'>
+                                <i class='fas fa-file-alt text-white'></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class='small text-gray-500'>". convertDate($record['created_date'])."</div>
+                            <div class='small text-gray-300'>". $record['name']."</div>
+                            <span class='font-weight-bold'>". substr($record['message'], 0, 30)."..."."</span>
+                        </div>
+                    </a>";
+            
+            }
+        }
+        $_SESSION['num_notif'] = count($nums); // Get the total number for each notification
+    }
+    
+}
+// logic for the notification: 7 new mails found
+
+function getContactNotif($db)
+{
+    $sql = "SELECT * FROM notifications WHERE `types` = 'contact' ";
+    $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+    // $data = array();
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        // echo "";
+    }
+    return $num_rows;
+}
+
+function getBookNotif($db)
+{
+    $sql = "SELECT * FROM notifications WHERE  `types` = 'booking' ";
+    $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+    // $data = array();
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        // echo "";
+    }
+    return $num_rows;
+}
+
+function getMailNotif($db)
+{
+    $sql = "SELECT * FROM notifications WHERE  `types` = 'mail' ";
+    $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+    // $data = array();
+    $num_rows = mysqli_num_rows($query);
+    if ($num_rows == 0 || !isset($num_rows)) 
+    {
+        // echo "";
+    }
+    return $num_rows;
+}
+
+function get_all_notif_by_type($db, $type)
+{
+    if ($type === 'mail') 
+    {
+        $sql = "SELECT * FROM notifications WHERE `types` = 'mail' ";
+        $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+        $data = array();
+        while ($row = mysqli_fetch_assoc($query)) 
+        {
+            $data[] = $row;
+        }
+        foreach ($data as $date) {
+            $id = $date['viewed'];
+            $date_1 = convertDate($date['created_date']) ;
+        }
+        $result = getNotifEntityId($db, $type) ;
+        if(isset($result))
+        {
+                    echo "
+                        <tr>
+                            <a href='./?inbox=$id' class='dropdown-item mt-2 mb-2'>
+                                <i class='fas fa-users mr-2'></i>".count(getNotifEntityId($db, $type))." new Mails 
+                                <span style='color:#858796;font-size:14px;margin-left:25px'>". $date_1 . "</span>
+                            </a>
+                        </tr>
+                    ";
+        }
+    }
+    elseif ($type === 'contact') 
+    {
+        $sql = "SELECT * FROM notifications WHERE `types` = '$type' ";
+        $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+        $data = array();
+        while ($row = mysqli_fetch_assoc($query)) 
+        {
+            $data[] = $row;
+        }
+        foreach ($data as $date) {
+            $id = $date['viewed'];
+            $date_1 = convertDate($date['created_date']) ;
+        }
+        $result = getNotifEntityId($db, $type) ;
+        if(isset($result))
+        {
+            echo "
+                <tr>
+                    <a href='./?booking=$id' class='dropdown-item mt-2 mb-2'>
+                        <i class='fas fa-users mr-2'></i>". count(getNotifEntityId($db, 'contact')) ." new Bookings 
+                        <span style='color:#858796;font-size:14px;margin-left:25px'>". $date_1 . "</span>
+                    </a>
+                </tr>
+                ";
+        }
+        
+    }
+    elseif ($type === 'booking') 
+    {
+        $sql = "SELECT * FROM notifications WHERE `types` = 'booking' ";
+        $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+        $data = array();
+        while ($row = mysqli_fetch_assoc($query)) 
+        {
+            $data[] = $row;
+        }
+        foreach ($data as $date) {
+            $id = $date['viewed'];
+            $date_1 = convertDate($date['created_date']) ;
+        }
+
+        $result = getNotifEntityId($db, $type) ;
+        if(isset($result))
+        {
+        echo "
+                <tr>
+                    <a href='./?agency=$id' class='dropdown-item mt-2 mb-2'>
+                        <i class='fas fa-users mr-2'></i>".count(getNotifEntityId($db, 'booking'))." new Agency 
+                        <span style='color:#858796;font-size:14px;margin-left:25px'>". $date_1 . "</span>
+                    </a>
+                </tr>
+            ";
+        }
+    }
+}
+
+
+function deleteMessage($db, $type)
+{
+    $sql = "DELETE FROM notifications WHERE viewed = 1 AND types = '$type' ";
+    $query = mysqli_query($db, $sql) or die("Failed to get NOTIFICATION from database " . mysqli_error($db));
+    
+}
 
 ?>

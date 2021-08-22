@@ -7,7 +7,7 @@
              <div class="card card-primary card-outline">
                  <div class="card-header">
                      <h3 class="card-title">New Notifications</h3>
-                     <h6 class="card-title">Found 1 New Messages </h6>
+                     <h6 class="card-title">Found <?php echo getAllNotification($conn) ?> New Messages </h6>
                  </div>
                  <!-- /.card-tools -->
              </div>
@@ -17,7 +17,13 @@
                  <div class="table-responsive mailbox-messages">
                      <table class="table table-hover table-striped">
                          <tbody>
-                             <a href='./?agency' class='dropdown-item mt-2 mb-2'><i class='fas fa-users mr-2'></i>1 new agency <span style='color:#858796;font-size:14px;margin-left:25px'>an hour ago</span></a>
+
+                            <?php
+
+                            echo get_all_notif_by_type($conn, 'mail');
+                            echo get_all_notif_by_type($conn, 'contact');
+                            echo get_all_notif_by_type($conn, 'booking');
+                            ?>
                          </tbody>
                      </table>
                  </div>

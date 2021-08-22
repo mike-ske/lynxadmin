@@ -77,7 +77,8 @@
                         }
                         elseif (isset($_GET['booking'])) 
                         {
-                            $id = $_GET['booking']
+                            $id = $_GET['booking'];
+                            echo deleteMessage($conn, 'contact');
                         ?>
                         
                            <!-- BOOKING PAGE -->
@@ -90,7 +91,7 @@
                         else if (isset($_GET['agency'])) 
                         {
                            $id = $_GET['agency'];
-
+                           echo deleteMessage($conn, 'booking');
                         ?>
                         
                         <!-- AGENCY PAGE -->
@@ -101,7 +102,8 @@
                         }
                         else if (isset($_GET['inbox'])) 
                         {
-                            $id = $_GET['inbox']
+                            $id = $_GET['inbox'];
+                            echo deleteMessage($conn, 'mail');
                         ?>
                         
                         <!-- MAILS PAGE -->
@@ -175,7 +177,7 @@
                         
                         ?>
                       <!-- MAIN HOME PAGE -->
-                      <h1 class="h3 mb-5 text-gray-800">Welcome To Dashboard</h1>
+                      <h1 class="h3 mb-5 text-gray-800">Welcome To Dashboard <?php echo $_SESSION['ad_name']?></h1>
                       <?php  require 'pages/home.php' ?>
 
                         <?php };?>

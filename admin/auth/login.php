@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <html lang="en">
 
 <head>
@@ -27,7 +29,7 @@
     <link rel="stylesheet" href="../../packed/plugins/sweetalert2/sweetalert2.min.css">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="./../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
@@ -57,7 +59,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image bg_img">
                                 <img src="../img/admin_logo.jpeg" alt="" 
                                      style="height: 16rem;position: relative;top: 50%;transform: translate(-50%, -50%);left: 50%;">
                             </div>
@@ -66,23 +68,22 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="../inc/manage_login" method="post">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                            <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" name="aggree" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <input type="submit" name="login" value="Login" class="btn btn-primary btn-user btn-block">
+                                     
                                     </form>
                                 </div>
                             </div>
@@ -109,10 +110,10 @@
 
     <!-- ========================== PLUGINS SECTIONS =================================== -->
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="./../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="./../js/sb-admin-2.min.js"></script>
 
     <!-- Summernote -->
     <script src="../../packed/plugins/summernote/summernote-bs4.min.js"></script>
@@ -122,11 +123,38 @@
     <script src="../../packed/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
     <script src="../../packed/plugins/toastr/toastr.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../../js/main.js"></script>
 
     <!-- AdminLTE for demo purposes -->
     <script src="../../packed/dist/js/demo.js"></script>
-    <script src="../../js/main.js"></script>
+ 
+
+
+    <?php
+        if (isset($_SESSION['status']) && isset($_SESSION['status_code'])) 
+        {
+    ?>
+     <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+        })
+
+        Toast.fire({
+            icon: "<?php echo $_SESSION['status_code']?>",
+            text: "<?php echo $_SESSION['status']?>",
+            title: "<?php echo $_SESSION['status_title']?>",
+            showConfirmButton: true,
+        });
+    </script>
+    <?php 
+        unset($_SESSION['status']);
+    }; 
+    ?>
+
 
 </body>
 

@@ -94,9 +94,9 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <form action="inc/logout.php" method="post">
+                    <form action="auth/logout" method="post">
+                        <input type="hidden" name="crsf" value="<?php print_r(password_hash('user', PASSWORD_DEFAULT))?>">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <input type="hidden" name="crsf" value="$2y$10$ewlgdnVo.kPbdGR8jQhVget7a6/ZnCyaE.sxxIFq29yp0YLx33L1q">
                         <button type="submit" class="btn btn-primary" name="send">Logout</button>
                     </form>
 
@@ -323,7 +323,7 @@
                 <div class="card card-info">
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="views/send_mail.php" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" action="views/send_mail" method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group mb-5">
                                 <input type="email"  name="email" class="form-control" placeholder="To:" value="<?php echo $_SESSION['mails']?>">

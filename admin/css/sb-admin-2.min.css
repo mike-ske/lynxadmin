@@ -2068,6 +2068,10 @@ pre code {
     .table-responsive-sm>.table-bordered {
         border: 0
     }
+
+    .bg_img img {
+        display: none;
+    }
 }
 
 @media (max-width:767.98px) {
@@ -11420,7 +11424,10 @@ a:focus {
 
 .topbar .dropdown .dropdown-menu {
     width: calc(100% - 1.5rem);
-    right: .75rem
+    right: .75rem;
+    overflow: auto;
+    /* height: 270px; */
+    max-height: 310px;
 }
 
 .topbar .dropdown-list {
@@ -11485,7 +11492,8 @@ a:focus {
 
     .topbar .dropdown .dropdown-menu {
         width: auto;
-        right: 0
+        right: 0;
+        
     }
 
     .topbar .dropdown-list {
@@ -12103,9 +12111,10 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url(https://source.unsplash.com/K4mSJ7kc0As/600x800);
+    background: url();
     background-position: center;
-    background-size: cover
+    background-size: cover;
+  
 }
 
 .bg-register-image {

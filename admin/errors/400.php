@@ -11,7 +11,7 @@
   <meta name="description" content="lynxlaboratories">
   <meta name="author" content="lynxlaboratories">
 
-  <title>Lynxsite | Lynxlab</title>
+  <title>Errors | lynxadmin</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -53,7 +53,7 @@
           understand due to invalid URL syntax. 
           Please type in the correct URL or you may 
         </p>
-      <a href="../">&larr;return to Home Page</a>
+      <a href="../auth/login">&larr;Return to Login Page</a>
 
     </div>
 

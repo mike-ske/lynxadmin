@@ -27,13 +27,13 @@ foreach ($url as $keyWord => $urls) {
     }
 }
 
-if (!isset($_SESSION['username']) && !isset($_SESSION['email'])) 
+if (!isset($_SESSION['ad_name']) && !isset($_SESSION['email'])) 
 {
-    // header('location: auth/login.php');
+    header('location: auth/login.php');
 } 
 else if (isset($_SERVER['REQUEST_URI']) == '/lynxadmin/') 
 {
-    header('location: pages/home.php');
+    // header('location: admin/');
 
 } 
 else if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] !== '/lynxadmin/') 

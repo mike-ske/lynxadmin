@@ -1,6 +1,7 @@
 
 <?php 
-require '../inc/dbconn.php';
+require 'dbconn.php';
+require 'function.php';
 
 
 use PHPMailer\PHPMailer\SMTP;
@@ -9,13 +10,6 @@ use PHPMailer\PHPMailer\Exception;
 
 
 
-if (isset($_SESSION['ml_id']))
-{
-   $id= $_SESSION['ml_id'];
-}
-else {
-    echo "<h6 class='text-center m-5'>No Mail ID found</h6>";
-}
 
 // get form input form contacts fields
 
@@ -29,29 +23,36 @@ else {
 require '../../vendor/autoload.php';
 
 
-
-if (isset($_POST['send']))
+if (isset($_POST['login']))
 {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $subject = mysqli_real_escape_string($conn, $_POST['subject']);
-    $message = mysqli_real_escape_string($conn, $_POST['message']);
-    $file = $_FILES['file'];
-    $message = strip_tags(htmlspecialchars_decode(htmlentities(trim($message))));
-
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $aggree = mysqli_real_escape_string($conn, $_POST['aggree']);
     
-
-    if (!empty($email) && !empty($subject) && !empty($message) )
+    $data = date('j F Y H:i:sa');
+   
+    $admin = getAdminAccount($conn);
+    $_SESSION['ad_email'] =  $email ;
+    $_SESSION['ad_password'] =  $password;
+    $_SESSION['ad_name'] =  $admin['admin_name'];
+    
+ 
+    if (empty($email) && empty($password) && empty($aggree))
     {
-        // Insert data into NOTIFICATIONS
-        $file_name = $_FILES['file']['name'];
-        $file_tmp_name = $_FILES['file']['tmp_name'];
-
-
+        $_SESSION['status'] = "Failed please check empty field";
+        $_SESSION['status_title'] = "Error";
+        $_SESSION['status_code'] = "error";
+        header("location: ../auth/login");  
+       
+    }
+    else if ($admin['email'] === $email && password_verify($password, $admin['password']) && isset($aggree))
+    {
+        
         // Instantiation and passing `true` enables exceptions
         $mail = new PHPMailer();
 
         //Server settings
-        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -62,17 +63,12 @@ if (isset($_POST['send']))
 
         //Recipients
         $mail->setFrom('info@lynxlaboratories.com.ng', 'Lynx Support Service');
-        $mail->addAddress($email, $subject);     // Add a recipient
+        $mail->addAddress($email);     // Add a recipient
         $mail->addAddress($email);               // Name is optional
-        $mail->addCC('info@lynxlaboratories.com.ng');
-        $mail->addBCC('info@lynxlaboratories.com.ng');
-
-         // Attachments         // Add attachments
-        // $mail->addAttachment($file_tmp_name, $file_name);    // Optional name
-        
+      
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = $subject;
+        $mail->Subject = 'Login Infomation';
         $mail->Body    = "
                     <div class='container' style='
                         font-family: 'roboto';
@@ -105,8 +101,9 @@ if (isset($_POST['send']))
                             '>
 
                             <b><strong>Reply to $email </strong></b> <br><br>
-                            <p style='line-height: 20px;'> Dear <b>$email</b> We have recieved your request and we are Happy to respond to your request shortly.<br><br></p>
-                            
+                            <p style='line-height: 20px;'> Dear <b>$email</b> 
+                            New account signed-in. You are recieving this mail because there was a login into your Admin account. Bellow
+                            are the login details of your account.
                             <p>
                             </div>
                             <div class='body' style='
@@ -114,10 +111,11 @@ if (isset($_POST['send']))
                                 max-width: 100%;
                                 height: auto;
                             '>
-                            <h3 style='font-size:14px;font-weight:600'>From - $email</h3>
-                            <h6 style='font-size:13px'>$subject</h6>
+                            <h2 style='font-size:15px;font-weight:600'>---- Email: $email</h2>
+                            <h3 style='font-size:15px'>---- Password: $password</h3>
+                            <h3 style='font-size:15px'>---- Last loged-in: $data</h3>
                             <p style='font-size:12px'>
-                                    $message
+                                    Please Confirm your login details.
                             </p>
                             </div>
                             <div class='foot' style='
@@ -181,42 +179,39 @@ if (isset($_POST['send']))
                     ";
         $mail->send();
 
-        if ($mail->send()) {
+        if ($mail->send()) 
+        {
             // echo  "<script>alert('Message has been sent! Check your email for confirmation. Thank you for contacting us')</script>";
 
-            $_SESSION['status'] = "Thank you mail sent";
+            $_SESSION['status'] = "Success! Loged-in";
             $_SESSION['status_title'] = "Success";
             $_SESSION['status_code'] = "success";
-            header("location:  ../?readMail=$id");
+            header("location:  ../");
             return true;  
 
         }
         else 
         {
-            $_SESSION['status'] = "Failed! Message could not be sent. Something went wrong";
+            $_SESSION['status'] = "Failed! Loged-in Mail not sent";
             $_SESSION['status_title'] = "Error";
-            $_SESSION['status_code'] = "error";
-            
-            // echo  "<script>alert('Message could not be sent. Check your internet connection')</script>";
-            header("location:  ./../?readMail=$id");  
+            $_SESSION['status_code'] = "error";            
+            header("location:  ../");  
             return false; 
         }
         // ========== END OF PHP MAILER TO SEND EMAILS =================
 
     }
-    else {
-            $_SESSION['status'] = "Failed please check empty field";
+    else 
+    {
+            $_SESSION['status'] = "Failed! Invalid Account";
             $_SESSION['status_title'] = "Error";
-            $_SESSION['status_code'] = "error";
-            header("location: ./../?readMail=$id");   
+            $_SESSION['status_code'] = "warning";
+            header("location: ../auth/login");   
             return false; 
     }
 
     
-    
 }
-
-
 
 
 ?>

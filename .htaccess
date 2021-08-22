@@ -16,8 +16,6 @@ RewriteBase  /
 
 RewriteRule ^index.\.php/?$ / [L,R=301,NC]
 
-RewriteEngine on
-RewriteBase /
 
 # Redirect the user to 404 error page when the URI is invalid
 ErrorDocument 404 https://lynxadmin.herokuapp.com/admin/errors/404.php
