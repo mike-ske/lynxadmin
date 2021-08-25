@@ -8,7 +8,7 @@
             </button>
         </div>
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0 scroll">
         <table class="table">
             <thead>
                 <tr>

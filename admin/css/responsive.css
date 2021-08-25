@@ -34,7 +34,9 @@
     }
   }
 
-  
+.scroll {
+  overflow: auto;
+}
 #preloader {
   overflow: hidden;
   background: #3b83b6;

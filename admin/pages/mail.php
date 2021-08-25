@@ -16,7 +16,7 @@
             <!-- /.card-tools -->
         </div>
         <!-- /.card-header -->
-        <div class="card-body p-0">
+        <div class="card-body p-0 scroll">
             <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                     <tbody>

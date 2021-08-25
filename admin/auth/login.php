@@ -92,7 +92,7 @@
                 </div>
 
             </div>
-
+            <span class="col-lg-6 d-none d-lg-block text-center text-gray-300 small">Admin system managed and secured by <a href="http://www.lynxsite.herokuapp.com" target="__blank" style="text-decoration: underline;">lynxlaboratories</a> Terms and conditions apply</span>
         </div>
 
     </div>
