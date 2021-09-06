@@ -11,6 +11,8 @@ if (isset($_POST['send']))
     $message = mysqli_real_escape_string($conn, html_entity_decode($_POST['message']));
     $cat_name = mysqli_real_escape_string($conn, html_entity_decode($_POST['cat_name']));
     $image =  $_FILES['image'];
+
+    $message = htmlentities($message );
     
 
     if (!empty($title) && !empty($author) && !empty($message) && !empty($cat_name) && !empty($image))
