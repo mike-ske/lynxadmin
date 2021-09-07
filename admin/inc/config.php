@@ -1,15 +1,16 @@
 <?php
 
 // ========== REMOTE DATABASE CONNECTION =======
-// define('DB_HOST', 'y5svr1t2r5xudqeq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com');
-// define('DB_PASS', 'x3re6upu94v48m0x');
-// define('DB_NAME', 'r8qw8oyoc0awxtvs');
-// define('DB_USER', 'hx1qv76lul5chjhv');
-
 define('DB_HOST', 'y5svr1t2r5xudqeq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com');
-define('DB_PASS', 'q1tzzjuf6dnj2z5x');
-define('DB_NAME', 'fkh7ubyr5r5c6oks');
-define('DB_USER', 'ucoe4hf03l9vxh15');
+define('DB_PASS', 'defdgbjmqkpuixrk');
+define('DB_NAME', 'r8qw8oyoc0awxtvs');
+define('DB_USER', 'hx1qv76lul5chjhv');
+
+
+// define('DB_HOST', 'y5svr1t2r5xudqeq.cbetxkdyhwsb.us-east-1.rds.amazonaws.com');
+// define('DB_PASS', 'q1tzzjuf6dnj2z5x');
+// define('DB_NAME', 'fkh7ubyr5r5c6oks');
+// define('DB_USER', 'ucoe4hf03l9vxh15');
 
 // // ========== LOCAL DATABASE CONNECTION =======
 // define('DB_HOST', 'localhost');
