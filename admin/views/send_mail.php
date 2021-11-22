@@ -68,7 +68,7 @@ if (isset($_POST['send']))
         $mail->addBCC('info@lynxlaboratories.com.ng');
 
          // Attachments         // Add attachments
-        // $mail->addAttachment($file_tmp_name, $file_name);    // Optional name
+        $mail->addAttachment($file_tmp_name, $file_name);    // Optional name
         
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
