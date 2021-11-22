@@ -59,7 +59,7 @@ if (isset($_POST['send']))
         $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
         //Recipients
-        $mail->setFrom('info@lynxlaboratories.com.ng', 'Lynx Support Service');
+        $mail->setFrom('lynxdna1@gmail.com', 'Lynx Support Service');
         $mail->addAddress($email, $subject);     // Add a recipient
         $mail->addAddress($email);               // Name is optional
         $mail->addCC('info@lynxlaboratories.com.ng');
