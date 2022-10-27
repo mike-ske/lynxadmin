@@ -88,5 +88,10 @@ jQuery( document ).ready(function( $ ) {
                 }
             });
         }
+	
+    $('#photo').on('change', function(e) {
+        var file = e.target.files[0].name;
+        $('#profile').html(file)
+    })
  
 });
