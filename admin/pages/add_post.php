@@ -30,11 +30,11 @@
 
                 <div class="row">
                     <div class="form-group mb-5 col-md-6">
-                        <label for="exampleInputFile">Input File</label>
+                        <label for="photo">Input File</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" name="image" class="custom-file-input" id="photo">
-                                <label id="profile" class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                <label id="profile" class="custom-file-label" for="photo">Choose file</label>
                                  
                             </div>
                         </div>
